@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html lang="es-CO">
+<head>
+    <meta charset="UTF-8">
+    <title>Pruba 2 Vue</title>
+    <style>
+        table{border-spacing: 0}
+        table, tr, td, th {border: 1px solid #ccc;}
+        td {padding: 5px}
+    </style>
+</head>
+<body>
+    <div id="contenido">
+        <h1>{{ titulo }} {{ nombre }}</h1>
+        <label for="nombre">Ingrese su nombre:</label>
+        <input type="text" id="nombre" name="nombre" v-model="nombre"> 
+    
+        <p>Usuarios:</p>
+        <table>
+            <thead>
+                <tr>
+                    <th>Nombre</th>
+                    <th>Id</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr v-for="user in users"> 
+                    <td>{{ user }}</td>
+                    <td>0</td>
+                </tr>
+            </tbody>
+            <tfoot>
+                <tr>
+                    <td colspan="2">
+                        <input type="text" v-model="nuevoUsr">
+                        <button @click="addUsr">Agregar Usuario</button>
+                        <!-- @click="addUsr" = v-on:click="addUsr"-->
+                    </td>
+                </tr>
+            </tfoot>
+        </table>
+    </div>
+
+    <script src="https://unpkg.com/vue@2.1.8/dist/vue.js"></script>
+    <script>
+        app = new Vue({
+            el: '#contenido',
+            data: {
+                titulo: 'Bienvenido: ',
+                nombre: '',
+                users: ['Lina', 'Otto', 'Henry', 'Mauro', 'Jorge', 'Carlos'],
+                nuevoUsr : ''
+            },
+            // se definene las funciones
+            methods: {
+                addUsr() {
+                    this.users.push(this.nuevoUsr);
+                    this.nuevoUsr = '';
+                }
+            },
+            // se definen los eventos luego que Vue carga (es similar a $().ready en jquery)
+            mounted() {
+                // code
+            }
+        });
+    </script>
+</body>
+</html>
